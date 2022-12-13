@@ -1,5 +1,48 @@
 # Laravel
 
+## Creating Laravel Application
+
+
+## API
+
+- It stands for **Application Programming Interface**.
+
+- Set of definitions and protocols.
+
+- Briddge between services. 
+
+There are different standards to implement it.
+
+- **SOAP** => Simple Object Access Protocol
+
+- **GraphQL** => Graph Query Language
+
+- **REST** => Representational State Transfer
+
+## REST 6 Guiding Constraints
+
+1. Client Server Architecture
+
+2. Statelessness
+
+3. Cacheability
+
+4. Layered System
+
+5. Code on Demand
+
+6. Uniform Interface
+
+
+## Why API is Needed
+
+1. Fetch Data 
+
+2. Communicate with another machine.
+
+
+
+
 
 # Reference
 
