@@ -1,8 +1,5 @@
 # Laravel
 
-## Creating Laravel Application
-
-
 ## API
 
 - It stands for **Application Programming Interface**.
@@ -36,10 +33,33 @@ There are different standards to implement it.
 
 ## Why API is Needed
 
-1. Fetch Data 
+1. Fetch Data.
 
 2. Communicate with another machine.
 
+3. Hide complexity.
+
+4. Build dynamic applications.
+
+5. Extend functionality of a service or an app.
+
+## Installing PHP, MYSQL and Composer on Windows
+
+https://www.youtube.com/watch?v=3EC9WFagbYE
+
+
+## Creating Laravel Application
+
+If composer and php is installed
+
+`composer create-project laravel/laravel example-app`
+
+## Configuring DB
+
+You do it in `.env` file
+
+
+![Screenshot_15](https://user-images.githubusercontent.com/204423/207367579-c5d9378f-f6d7-42e1-ae07-42a077e1f17e.png)
 
 
 
