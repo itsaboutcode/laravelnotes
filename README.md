@@ -50,9 +50,11 @@ https://www.youtube.com/watch?v=3EC9WFagbYE
 
 ## Creating Laravel Application
 
-If composer and php is installed
-
 `composer create-project laravel/laravel example-app`
+
+## Staring Laravel Application
+
+`php artisan serve`
 
 ## Project Structure
 
