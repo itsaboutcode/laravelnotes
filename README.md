@@ -1,4 +1,4 @@
-# Laravel
+# Laravel with Docker
 
 ## API
 
@@ -6,7 +6,7 @@
 
 - Set of definitions and protocols.
 
-- Briddge between services. 
+- Bridge between services. 
 
 There are different standards to implement it.
 
@@ -16,7 +16,7 @@ There are different standards to implement it.
 
 - **REST** => Representational State Transfer
 
-## REST 6 Guiding Constraints
+## 6 Guiding Constraints for the REST API
 
 1. Client Server Architecture
 
@@ -41,11 +41,33 @@ There are different standards to implement it.
 
 4. Build dynamic applications.
 
-5. Extend functionality of a service or an app.
+5. Extend the functionality of a service or an app.
 
 ## Installing PHP, MYSQL and Composer on Windows
 
 https://www.youtube.com/watch?v=3EC9WFagbYE
+
+## Setup Laravel Environment with Docker
+
+1. Install docker
+
+2. Create your project folder, get into it and open the folder in your favourite IDE (In my case, VSCode | PHPStorm)
+
+```
+mkdir laravel_with_docker
+cd laravel_with_docker
+code .
+```
+
+3. Create a `docker-compose.yml` file
+
+![Screenshot 2024-08-10 at 4 59 27 PM](https://github.com/user-attachments/assets/9eab14a9-3a7b-44dc-a6f3-447d72e8b9b2)
+
+4. You need to have the following images in your docker file for it to work.
+
+i) PHP
+ii) DB (Mysql in my case).
+ii) phpmyadmin (optional) to easily access the DB without any external tool such as DataGrip from JetBrains.
 
 
 ## Creating Laravel Application
@@ -64,7 +86,7 @@ https://www.youtube.com/watch?v=3EC9WFagbYE
 
 ## Configuring DB
 
-You do it in `.env` file
+You do it in the `.env` file.
 
 
 ![Screenshot_15](https://user-images.githubusercontent.com/204423/207367579-c5d9378f-f6d7-42e1-ae07-42a077e1f17e.png)
@@ -85,19 +107,19 @@ You do it in `.env` file
 
 ### Model
 
-- Each table in the DB have corresponding Model class in laravel application.
+- Each table in the DB has a corresponding Model class in the laravel application.
 
 - It's used to do CRUD operations on the table.
 
-- Convention is to name it `Singular`.
+- The convention is to name it `Singular`.
 
-- You can create model with following command
+- You can create a model with the following command
 
 ```
 php artisan make:model ModelName 
 ```
 
-- You can create, migration, Factory, Seeder and Controller with Model too.
+- You can create, migrate, Factory, Seeder and Controller with Model, too.
 
 ```
 php artisan make:model ModelName -m
@@ -149,7 +171,7 @@ php artisan make:controller PhotoController
 
 - API controller routes don't use `create` and `edit` methods
 
-- We can create a controller which exclude those 2 methods using `--api` flag.
+- We can create a controller which excludes those 2 methods using the `--api` flag.
 
 ```
 php artisan make:controller PhotoController --api
@@ -168,13 +190,13 @@ php artisan make:controller PetitionController --api --model=Petition
 
 ### API Resource
 
-- These are the template classes where you defined how you want the JSON data to be returned back to user.
-- You create these resources for single, collection and for any other type of resource you want to return.
+- These are the template classes where you defined how you want the JSON data to be returned to the user.
+- You create these resources for a single collection and for any other type of resource you want to return.
 
 ```
 php artisan make:resource PetitionResource
 
-php artisan make:resource PetitionCollection // Create a collection resource. It figure that out from name
+php artisan make:resource PetitionCollection // Create a collection resource. I figure that out from the name
 ```
 
 
