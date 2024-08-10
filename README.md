@@ -80,28 +80,30 @@ With the PHP, we need to make some additional stuff e.g,
 - setup working directory in the image => code will be in our local/host system, but we need to copy that
 
 ```
-version: '3.9'
-
 services:
   db:
     image: mariadb
     restart: unless-stopped
+    container_name: laravel_with_docker_db
     volumes:
-      - db_data:/var/lib/mysql
+      - laravel_with_docker_db_volume:/var/lib/mysql
+    ports:
+      - "3306:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_root_password
       - MYSQL_DATABASE=docker_laravel
       - MYSQL_USER=docker_laravel
       - MYSQL_PASSWORD_FILE=/run/secrets/db_password
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_root_password
     secrets:
       - db_root_password
       - db_password
     networks:
-      - docker_laravel
+      - laravel_with_docker_network
   
   phpmyadmin:
     image: phpmyadmin
     restart: unless-stopped
+    container_name: laravel_with_docker_phpmyadmin
     depends_on:
       - db
     ports:
@@ -112,7 +114,7 @@ services:
     secrets:
       - db_root_password
     networks:
-      - docker_laravel
+      - laravel_with_docker_network
 
 secrets:
   db_password:
@@ -121,10 +123,10 @@ secrets:
     file: db_root_password.txt
 
 volumes:
-  db_data:
+  laravel_with_docker_db_volume:
 
 networks:
-  docker_laravel:
+  laravel_with_docker_network:
     driver: bridge
 ```
 
