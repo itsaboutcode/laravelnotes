@@ -65,9 +65,81 @@ code .
 
 4. You need to have the following images in your docker file for it to work.
 
-i) PHP
-ii) DB (Mysql in my case).
-ii) phpmyadmin (optional) to easily access the DB without any external tool such as DataGrip from JetBrains.
+i) PHP with apache - https://hub.docker.com/_/php
+
+ii) DB/Mariadb (Mysql in my case) - https://hub.docker.com/_/mysql, https://hub.docker.com/_/mariadb
+
+iii) phpmyadmin (optional) to easily access the DB without any external tool such as DataGrip from JetBrains - https://hub.docker.com/_/phpmyadmin
+
+iv) Need to set a volume for the DB to store the DB persistently
+
+v) Need to set a network so that all of the above three images communicate with each other
+
+With the PHP, we need to make some additional stuff e.g,
+
+- setup working directory in the image => code will be in our local/host system, but we need to copy that
+
+```
+version: '3.9'
+
+services:
+  db:
+    image: mariadb
+    restart: unless-stopped
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_root_password
+      - MYSQL_DATABASE=docker_laravel
+      - MYSQL_USER=docker_laravel
+      - MYSQL_PASSWORD_FILE=/run/secrets/db_password
+    secrets:
+      - db_root_password
+      - db_password
+    networks:
+      - docker_laravel
+  
+  phpmyadmin:
+    image: phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_HOST=db
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_root_password
+    secrets:
+      - db_root_password
+    networks:
+      - docker_laravel
+
+secrets:
+  db_password:
+    file: db_password.txt
+  db_root_password:
+    file: db_root_password.txt
+
+volumes:
+  db_data:
+
+networks:
+  docker_laravel:
+    driver: bridge
+```
+
+### Start the container
+
+```
+docker-compose up
+docker compose up -d # run in detach mode
+```
+
+### End the container
+```
+docker-compose down
+```
+
 
 
 ## Creating Laravel Application
@@ -196,7 +268,7 @@ php artisan make:controller PetitionController --api --model=Petition
 ```
 php artisan make:resource PetitionResource
 
-php artisan make:resource PetitionCollection // Create a collection resource. I figure that out from the name
+php artisan make:resource PetitionCollection // Create a collection resource. I figure that out from the name.
 ```
 
 
